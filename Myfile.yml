@@ -1,0 +1,26 @@
+##
+## EPITECH PROJECT, 2020
+## libtilix
+## File description:
+## This file describes the project's dependencies and allowed functions.
+##
+
+name: libtilix.a
+
+type: lib
+
+namespace: tilix
+
+dependencies:
+  - libjzon=master
+  - libmy=master
+
+allowed:
+  - malloc free calloc
+  - memmove memcpy memset
+  - write read open close
+  - free
+
+src:
+
+tests_src:
