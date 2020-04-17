@@ -26,4 +26,6 @@ OPT_DEFINE(tl_chunk_t, tl_chunk)
 
 extern const jzon_type_desc_t TL_CHUNK_TYPE_DESC;
 
+void tl_chunk_dispose(const tl_chunk_t *chunk);
+
 #endif /* LIBTILIX_CHUNK_H */

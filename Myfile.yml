@@ -22,5 +22,7 @@ allowed:
   - free
 
 src:
+  - ./src/chunk.c
 
 tests_src:
+  - ./tests/chunk.c
