@@ -18,7 +18,7 @@ const jzon_type_desc_t TL_CHUNK_TYPE_DESC = {
             .match = ".data",
             .offset = offsetof(tl_chunk_t, data.gids),
             .type = &JZON_HEAP_ARR_TYPE_DESC,
-            .item_type = &JZON_U64_TYPE_DESC,
+            .params.item_type = &JZON_U64_TYPE_DESC,
         },
         {
             .match = ".data",
