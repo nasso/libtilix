@@ -8,7 +8,7 @@
 #include "my/my.h"
 #include "jzon/jzon.h"
 #include "jzon/deser.h"
-#include "tilix/common_deser.h"
+#include "tilix/common.h"
 #include "tilix/property.h"
 
 static bool parse_prop(tl_property_t *prop, const jzon_t jval)
@@ -103,3 +103,10 @@ const jzon_type_desc_t TL_PROPERTIES_TYPE_DESC = {
         },
     },
 };
+
+void tl_property_dispose(tl_property_t *self)
+{
+    my_free(self->name);
+    if (self->type == TL_FILE || self->type == TL_STRING)
+        my_free(self->u.str);
+}

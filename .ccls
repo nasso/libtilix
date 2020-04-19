@@ -1,0 +1,12 @@
+-x
+c
+-fno-builtin
+-Wall
+-Wextra
+-Wno-missing-field-initializers
+-Wno-empty-translation-unit
+-pedantic
+-I./include
+-I./lib/include
+-I./target/release/include
+-I./target/debug/include

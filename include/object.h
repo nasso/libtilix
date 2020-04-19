@@ -19,19 +19,11 @@ typedef enum {
     TL_HALIGN_LEFT,
 } tl_text_halign_t;
 
-OPT_DEFINE(tl_text_halign_t, tl_text_halign)
-
-extern const jzon_type_desc_t TL_TEXT_HALIGN_TYPE_DESC;
-
 typedef enum {
     TL_VALIGN_CENTER,
     TL_VALIGN_BOTTOM,
     TL_VALIGN_TOP,
 } tl_text_valign_t;
-
-OPT_DEFINE(tl_text_valign_t, tl_text_valign)
-
-extern const jzon_type_desc_t TL_TEXT_VALIGN_TYPE_DESC;
 
 typedef struct {
     bool bold;
@@ -48,9 +40,9 @@ typedef struct {
     bool wrap;
 } tl_text_t;
 
-OPT_DEFINE(tl_text_t, tl_text)
-
 extern const jzon_type_desc_t TL_TEXT_TYPE_DESC;
+
+void tl_text_dispose(tl_text_t *self);
 
 typedef enum {
     TL_OBJ_ELLIPSE,
@@ -62,16 +54,10 @@ typedef enum {
     TL_OBJ_TILE,
 } tl_object_kind_t;
 
-OPT_DEFINE(tl_object_kind_t, tl_object_kind)
-
-extern const jzon_type_desc_t TL_OBJECT_KIND_TYPE_DESC;
-
 typedef struct {
     f64_t x;
     f64_t y;
 } tl_point_t;
-
-OPT_DEFINE(tl_point_t, tl_point)
 
 extern const jzon_type_desc_t TL_POINT_TYPE_DESC;
 
@@ -94,19 +80,19 @@ typedef struct {
     union {
         u64_t gid;
         struct {
-            tl_point_t *points;
+            tl_point_t *data;
             usize_t len;
         } polygon;
         struct {
-            tl_point_t *points;
+            tl_point_t *data;
             usize_t len;
         } polyline;
         tl_text_t text;
     } u;
 } tl_object_t;
 
-OPT_DEFINE(tl_object_t, tl_object)
-
 extern const jzon_type_desc_t TL_OBJECT_TYPE_DESC;
+
+void tl_object_dispose(tl_object_t *self);
 
 #endif /* TILIX_OBJECT_H */

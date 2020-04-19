@@ -24,9 +24,12 @@ allowed:
 src:
   - ./src/chunk.c
   - ./src/color.c
+  - ./src/layer.c
+  - ./src/object.c
   - ./src/property.c
 
 tests_src:
   - ./tests/chunk.c
   - ./tests/color.c
+  - ./tests/object.c
   - ./tests/property.c

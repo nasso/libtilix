@@ -7,7 +7,7 @@
 
 #include <criterion/criterion.h>
 #include "my/my.h"
-#include "tilix/common_deser.h"
+#include "tilix/common.h"
 
 Test(color, parse_rgb)
 {

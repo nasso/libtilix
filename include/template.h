@@ -22,4 +22,6 @@ OPT_DEFINE(tl_object_template_t, tl_object_template)
 
 extern const jzon_type_desc_t TL_OBJECT_TEMPLATE_TYPE_DESC;
 
+void tl_object_template_dispose(tl_object_template_t *self);
+
 #endif /* LIBTILIX_TEMPLATE_H */

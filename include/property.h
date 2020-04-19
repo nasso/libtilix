@@ -42,4 +42,6 @@ OPT_DEFINE(tl_property_t, tl_property)
 extern const jzon_type_desc_t TL_PROPERTY_TYPE_DESC;
 extern const jzon_type_desc_t TL_PROPERTIES_TYPE_DESC;
 
+void tl_property_dispose(tl_property_t *self);
+
 #endif /* LIBTILIX_PROPERTY_H */

@@ -21,8 +21,6 @@ typedef enum {
     TL_MAP_HEX,
 } tl_map_orient_t;
 
-OPT_DEFINE(tl_map_orient_t, tl_map_orient)
-
 extern const jzon_type_desc_t TL_MAP_ORIENT_TYPE_DESC;
 
 typedef enum {
@@ -32,8 +30,6 @@ typedef enum {
     TL_MAP_LEFT_UP,
 } tl_map_renderorder_t;
 
-OPT_DEFINE(tl_map_renderorder_t, tl_map_renderorder)
-
 extern const jzon_type_desc_t TL_MAP_RENDERORDER_TYPE_DESC;
 
 typedef enum {
@@ -41,16 +37,12 @@ typedef enum {
     TL_MAP_STAG_Y,
 } tl_map_staggeraxis_t;
 
-OPT_DEFINE(tl_map_staggeraxis_t, tl_map_staggeraxis)
-
 extern const jzon_type_desc_t TL_MAP_STAGGERAXIS_TYPE_DESC;
 
 typedef enum {
     TL_MAP_STAG_ODD,
     TL_MAP_STAG_EVEN,
 } tl_map_staggerindex_t;
-
-OPT_DEFINE(tl_map_staggerindex_t, tl_map_staggerindex)
 
 extern const jzon_type_desc_t TL_MAP_STAGGERINDEX_TYPE_DESC;
 
@@ -86,5 +78,7 @@ typedef struct {
 OPT_DEFINE(tl_map_t, tl_map)
 
 extern const jzon_type_desc_t TL_MAP_TYPE_DESC;
+
+void tl_map_dispose(tl_map_t *self);
 
 #endif /* LIBTILIX_MAP_H */

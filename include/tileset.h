@@ -18,8 +18,6 @@ typedef enum {
     TL_GRID_ISO,
 } tl_grid_orientation_t;
 
-OPT_DEFINE(tl_grid_orientation_t, tl_grid_orientation)
-
 extern const jzon_type_desc_t TL_GRID_ORIENTATION_TYPE_DESC;
 
 typedef struct {
@@ -28,8 +26,6 @@ typedef struct {
     u64_t width;
 } tl_grid_t;
 
-OPT_DEFINE(tl_grid_t, tl_grid)
-
 extern const jzon_type_desc_t TL_GRID_TYPE_DESC;
 
 typedef struct {
@@ -37,16 +33,12 @@ typedef struct {
     i64_t y;
 } tl_tileoffset_t;
 
-OPT_DEFINE(tl_tileoffset_t, tl_tileoffset)
-
 extern const jzon_type_desc_t TL_TILEOFFSET_TYPE_DESC;
 
 typedef struct {
     u64_t duration;
     u64_t tileid;
 } tl_frame_t;
-
-OPT_DEFINE(tl_frame_t, tl_frame)
 
 extern const jzon_type_desc_t TL_FRAME_TYPE_DESC;
 
@@ -62,6 +54,8 @@ typedef struct {
 OPT_DEFINE(tl_terrain_t, tl_terrain)
 
 extern const jzon_type_desc_t TL_TERRAIN_TYPE_DESC;
+
+void tl_terrain_dispose(tl_terrain_t *self);
 
 typedef struct {
     struct {
@@ -82,9 +76,9 @@ typedef struct {
     char *type;
 } tl_tile_t;
 
-OPT_DEFINE(tl_tile_t, tl_tile)
-
 extern const jzon_type_desc_t TL_TILE_TYPE_DESC;
+
+void tl_tile_dispose(tl_terrain_t *self);
 
 typedef struct {
     u32_t color;
@@ -93,9 +87,9 @@ typedef struct {
     u64_t tile;
 } tl_wangcolor_t;
 
-OPT_DEFINE(tl_wangcolor_t, tl_wangcolor)
-
 extern const jzon_type_desc_t TL_WANGCOLOR_TYPE_DESC;
+
+void tl_wangcolor_dispose(tl_wangcolor_t *self);
 
 typedef struct {
     bool dflip;
@@ -104,8 +98,6 @@ typedef struct {
     bool vflip;
     u8_t wangid[8];
 } tl_wangtile_t;
-
-OPT_DEFINE(tl_wangtile_t, tl_wangtile)
 
 extern const jzon_type_desc_t TL_WANGTILE_TYPE_DESC;
 
@@ -130,9 +122,9 @@ typedef struct {
     } wangtiles;
 } tl_wangset_t;
 
-OPT_DEFINE(tl_wangset_t, tl_wangset)
-
 extern const jzon_type_desc_t TL_WANGSET_TYPE_DESC;
+
+void tl_wangset_dispose(tl_wangset_t *self);
 
 typedef struct {
     u32_t backgroundcolor;
@@ -173,5 +165,7 @@ typedef struct {
 OPT_DEFINE(tl_tileset_t, tl_tileset)
 
 extern const jzon_type_desc_t TL_TILESET_TYPE_DESC;
+
+void tl_tileset_dispose(tl_tileset_t *self);
 
 #endif /* LIBTILIX_TILESET_H */
