@@ -24,6 +24,6 @@ typedef struct {
 
 extern const jzon_type_desc_t TL_CHUNK_TYPE_DESC;
 
-void tl_chunk_dispose(const tl_chunk_t *chunk);
+void tl_chunk_deinit(const tl_chunk_t *chunk);
 
 #endif /* LIBTILIX_CHUNK_H */

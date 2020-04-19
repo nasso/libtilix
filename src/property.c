@@ -104,7 +104,7 @@ const jzon_type_desc_t TL_PROPERTIES_TYPE_DESC = {
     },
 };
 
-void tl_property_dispose(tl_property_t *self)
+void tl_property_deinit(tl_property_t *self)
 {
     my_free(self->name);
     if (self->type == TL_FILE || self->type == TL_STRING)

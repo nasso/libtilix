@@ -189,6 +189,7 @@ const jzon_type_desc_t TL_LAYER_TYPE_DESC = {
         },
         {
             .match = ".properties",
+            .default_json = "[]",
             .offset = offsetof(tl_layer_t, properties),
             .type = &TL_PROPERTIES_TYPE_DESC,
         },
@@ -200,13 +201,13 @@ static void dispose_types(tl_layer_t *self)
     switch (self->type) {
     case TL_LAYER_TILELAYER:
         for (usize_t i = 0; i < self->chunks.len; i++)
-            tl_chunk_dispose(&self->chunks.data[i]);
+            tl_chunk_deinit(&self->chunks.data[i]);
         my_free(self->chunks.data);
         my_free(self->data.gids);
         break;
     case TL_LAYER_OBJECTGROUP:
         for (usize_t i = 0; i < self->objects.len; i++)
-            tl_object_dispose(&self->objects.data[i]);
+            tl_object_deinit(&self->objects.data[i]);
         my_free(self->objects.data);
         break;
     case TL_LAYER_IMAGELAYER:
@@ -214,12 +215,12 @@ static void dispose_types(tl_layer_t *self)
         break;
     case TL_LAYER_GROUP:
         for (usize_t i = 0; i < self->layers.len; i++)
-            tl_layer_dispose(&self->layers.data[i]);
+            tl_layer_deinit(&self->layers.data[i]);
         my_free(self->layers.data);
     }
 }
 
-void tl_layer_dispose(tl_layer_t *self)
+void tl_layer_deinit(tl_layer_t *self)
 {
     my_free(self->name);
     dispose_types(self);

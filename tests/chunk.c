@@ -33,5 +33,5 @@ Test(chunk, example)
     cr_assert_eq(chunk.width, 16);
     cr_assert_eq(chunk.x, 0);
     cr_assert_eq(chunk.y, -16);
-    tl_chunk_dispose(&chunk);
+    tl_chunk_deinit(&chunk);
 }

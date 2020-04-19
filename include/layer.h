@@ -84,6 +84,6 @@ OPT_DEFINE(tl_layer_t, tl_layer)
 
 extern const jzon_type_desc_t TL_LAYER_TYPE_DESC;
 
-void tl_layer_dispose(tl_layer_t *self);
+void tl_layer_deinit(tl_layer_t *self);
 
 #endif /* LIBTILIX_LAYER_H */

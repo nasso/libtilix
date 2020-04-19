@@ -101,7 +101,7 @@ const jzon_type_desc_t TL_TEXT_TYPE_DESC = {
     },
 };
 
-void tl_text_dispose(tl_text_t *self)
+void tl_text_deinit(tl_text_t *self)
 {
     my_free(self->fontfamily);
     my_free(self->text);
@@ -253,11 +253,11 @@ const jzon_type_desc_t TL_OBJECT_TYPE_DESC = {
     },
 };
 
-void tl_object_dispose(tl_object_t *self)
+void tl_object_deinit(tl_object_t *self)
 {
     my_free(self->name);
     for (usize_t i = 0; i < self->properties.len; i++)
-        tl_property_dispose(&self->properties.data[i]);
+        tl_property_deinit(&self->properties.data[i]);
     my_free(self->template);
     my_free(self->type);
     switch (self->kind) {
@@ -268,7 +268,7 @@ void tl_object_dispose(tl_object_t *self)
         my_free(self->polyline.data);
         break;
     case TL_OBJ_TEXT:
-        tl_text_dispose(&self->text);
+        tl_text_deinit(&self->text);
     default:
         break;
     }

@@ -42,7 +42,7 @@ typedef struct {
 
 extern const jzon_type_desc_t TL_TEXT_TYPE_DESC;
 
-void tl_text_dispose(tl_text_t *self);
+void tl_text_deinit(tl_text_t *self);
 
 typedef enum {
     TL_OBJ_ELLIPSE,
@@ -91,6 +91,6 @@ typedef struct {
 
 extern const jzon_type_desc_t TL_OBJECT_TYPE_DESC;
 
-void tl_object_dispose(tl_object_t *self);
+void tl_object_deinit(tl_object_t *self);
 
 #endif /* TILIX_OBJECT_H */

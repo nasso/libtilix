@@ -79,6 +79,6 @@ OPT_DEFINE(tl_map_t, tl_map)
 
 extern const jzon_type_desc_t TL_MAP_TYPE_DESC;
 
-void tl_map_dispose(tl_map_t *self);
+void tl_map_deinit(tl_map_t *self);
 
 #endif /* LIBTILIX_MAP_H */
