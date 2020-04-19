@@ -77,18 +77,16 @@ typedef struct {
     f64_t width;
     f64_t x;
     f64_t y;
-    union {
-        u64_t gid;
-        struct {
-            tl_point_t *data;
-            usize_t len;
-        } polygon;
-        struct {
-            tl_point_t *data;
-            usize_t len;
-        } polyline;
-        tl_text_t text;
-    } u;
+    u64_t gid;
+    struct {
+        tl_point_t *data;
+        usize_t len;
+    } polygon;
+    struct {
+        tl_point_t *data;
+        usize_t len;
+    } polyline;
+    tl_text_t text;
 } tl_object_t;
 
 extern const jzon_type_desc_t TL_OBJECT_TYPE_DESC;

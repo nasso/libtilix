@@ -44,7 +44,7 @@ LIBDIR	?=	$(abspath ./lib)
 INCLUDE =	-I$(OUTDIR)/include -I$(LIBDIR)/include
 
 CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
-			$(INCLUDE) $(if $(DEBUG),-g3) \
+			$(INCLUDE) $(if $(DEBUG),-g3) $(if $(COVERAGE),--coverage) \
 			$(patsubst %,-DMY_ALLOW_FUN_%,$(strip \
 				$(shell echo $(ALLOWED) | tr a-z A-Z)))
 
@@ -176,7 +176,6 @@ $(OUTDIR): $(abspath ./include)
 $(TEST): $(OUTTEST)
 	@cp $(OUTTEST) $(TEST)
 
-$(OUTTEST): CFLAGS += --coverage
 $(OUTTEST): LIBS += -lcriterion
 $(OUTTEST): $(DEPSARC) $(OBJ) $(TESTOBJ)
 	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(TESTOBJ) $(LIBDIR:%=-L%) $(LIBS)

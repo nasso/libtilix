@@ -18,21 +18,25 @@ const jzon_type_desc_t TL_TEXT_TYPE_DESC = {
     .fields = {
         {
             .match = ".bold",
+            .default_json = "false",
             .offset = offsetof(tl_text_t, bold),
             .type = &JZON_BOOL_TYPE_DESC,
         },
         {
             .match = ".color",
+            .default_json = "\"#000000\"",
             .offset = offsetof(tl_text_t, color),
             .type = &TL_COLOR_STR_TYPE_DESC,
         },
         {
             .match = ".fontfamily",
+            .default_json = "\"sans-serif\"",
             .offset = offsetof(tl_text_t, fontfamily),
             .type = &JZON_STR_TYPE_DESC,
         },
         {
             .match = ".halign",
+            .default_json = "\"left\"",
             .offset = offsetof(tl_text_t, halign),
             .type = &JZON_ENUM_TYPE_DESC,
             .params.str_enum = {
@@ -44,21 +48,25 @@ const jzon_type_desc_t TL_TEXT_TYPE_DESC = {
         },
         {
             .match = ".italic",
+            .default_json = "false",
             .offset = offsetof(tl_text_t, italic),
             .type = &JZON_BOOL_TYPE_DESC,
         },
         {
             .match = ".kerning",
+            .default_json = "true",
             .offset = offsetof(tl_text_t, kerning),
             .type = &JZON_BOOL_TYPE_DESC,
         },
         {
             .match = ".pixelsize",
+            .default_json = "16",
             .offset = offsetof(tl_text_t, pixelsize),
             .type = &JZON_U64_TYPE_DESC,
         },
         {
             .match = ".strikeout",
+            .default_json = "false",
             .offset = offsetof(tl_text_t, strikeout),
             .type = &JZON_BOOL_TYPE_DESC,
         },
@@ -69,11 +77,13 @@ const jzon_type_desc_t TL_TEXT_TYPE_DESC = {
         },
         {
             .match = ".underline",
+            .default_json = "false",
             .offset = offsetof(tl_text_t, underline),
             .type = &JZON_BOOL_TYPE_DESC,
         },
         {
             .match = ".valign",
+            .default_json = "\"top\"",
             .offset = offsetof(tl_text_t, valign),
             .type = &JZON_ENUM_TYPE_DESC,
             .params.str_enum = {
@@ -84,6 +94,7 @@ const jzon_type_desc_t TL_TEXT_TYPE_DESC = {
         },
         {
             .match = ".wrap",
+            .default_json = "false",
             .offset = offsetof(tl_text_t, wrap),
             .type = &JZON_BOOL_TYPE_DESC,
         },
@@ -122,7 +133,7 @@ static bool deser_kind(const jzon_t jz, const jzon_deser_params_t *params,
     obj->kind = TL_OBJ_RECT;
     obj->kind = jzon_getk_bool(jz, "ellipse") ? TL_OBJ_ELLIPSE : obj->kind;
     obj->kind = jzon_getk_bool(jz, "point") ? TL_OBJ_POINT : obj->kind;
-    obj->kind = jzon_getk_str(jz, "text") != NULL ? TL_OBJ_TEXT : obj->kind;
+    obj->kind = jzon_getq_str(jz, ".text.text") ? TL_OBJ_TEXT : obj->kind;
     obj->kind = jzon_getk_len(jz, "polygon") > 0 ? TL_OBJ_POLYGON : obj->kind;
     obj->kind = jzon_getk_len(jz, "polyline") > 0 ? TL_OBJ_POLYLINE : obj->kind;
     obj->kind = jzon_getk_num(jz, "gid") > 0 ? TL_OBJ_TILE : obj->kind;
@@ -161,7 +172,7 @@ const jzon_type_desc_t TL_OBJECT_TYPE_DESC = {
         },
         {
             .match = ".properties",
-            .optional = true,
+            .default_json = "[]",
             .offset = offsetof(tl_object_t, properties),
             .type = &TL_PROPERTIES_TYPE_DESC,
         },
@@ -204,39 +215,39 @@ const jzon_type_desc_t TL_OBJECT_TYPE_DESC = {
         {
             .match = ".gid",
             .optional = true,
-            .offset = offsetof(tl_object_t, u.gid),
+            .offset = offsetof(tl_object_t, gid),
             .type = &JZON_U64_TYPE_DESC,
         },
         {
             .match = ".polygon",
             .optional = true,
-            .offset = offsetof(tl_object_t, u.polygon.data),
+            .offset = offsetof(tl_object_t, polygon.data),
             .type = &JZON_HEAP_ARR_TYPE_DESC,
             .params.item_type = &TL_POINT_TYPE_DESC,
         },
         {
             .match = ".polygon",
             .optional = true,
-            .offset = offsetof(tl_object_t, u.polygon.len),
+            .offset = offsetof(tl_object_t, polygon.len),
             .type = &JZON_ARR_SIZE_TYPE_DESC,
         },
         {
             .match = ".polyline",
             .optional = true,
-            .offset = offsetof(tl_object_t, u.polyline.data),
+            .offset = offsetof(tl_object_t, polyline.data),
             .type = &JZON_HEAP_ARR_TYPE_DESC,
             .params.item_type = &TL_POINT_TYPE_DESC,
         },
         {
             .match = ".polyline",
             .optional = true,
-            .offset = offsetof(tl_object_t, u.polyline.len),
+            .offset = offsetof(tl_object_t, polyline.len),
             .type = &JZON_ARR_SIZE_TYPE_DESC,
         },
         {
             .match = ".text",
             .optional = true,
-            .offset = offsetof(tl_object_t, u.text),
+            .offset = offsetof(tl_object_t, text),
             .type = &TL_TEXT_TYPE_DESC,
         },
     },
@@ -251,13 +262,13 @@ void tl_object_dispose(tl_object_t *self)
     my_free(self->type);
     switch (self->kind) {
     case TL_OBJ_POLYGON:
-        my_free(self->u.polygon.data);
+        my_free(self->polygon.data);
         break;
     case TL_OBJ_POLYLINE:
-        my_free(self->u.polyline.data);
+        my_free(self->polyline.data);
         break;
     case TL_OBJ_TEXT:
-        tl_text_dispose(&self->u.text);
+        tl_text_dispose(&self->text);
     default:
         break;
     }

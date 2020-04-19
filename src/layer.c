@@ -49,21 +49,25 @@ const jzon_type_desc_t TL_LAYER_TYPE_DESC = {
         },
         {
             .match = ".startx",
+            .optional = true,
             .offset = offsetof(tl_layer_t, startx),
             .type = &JZON_I64_TYPE_DESC,
         },
         {
             .match = ".starty",
+            .optional = true,
             .offset = offsetof(tl_layer_t, starty),
             .type = &JZON_I64_TYPE_DESC,
         },
         {
             .match = ".offsetx",
+            .default_json = "0",
             .offset = offsetof(tl_layer_t, offsetx),
             .type = &JZON_F64_TYPE_DESC,
         },
         {
             .match = ".offsety",
+            .default_json = "0",
             .offset = offsetof(tl_layer_t, offsety),
             .type = &JZON_F64_TYPE_DESC,
         },
@@ -91,22 +95,23 @@ const jzon_type_desc_t TL_LAYER_TYPE_DESC = {
         {
             .match = ".chunks",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.tilelayer.chunks.data),
+            .offset = offsetof(tl_layer_t, chunks.data),
             .type = &JZON_HEAP_ARR_TYPE_DESC,
             .params.item_type = &TL_CHUNK_TYPE_DESC,
         },
         {
             .match = ".chunks",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.tilelayer.chunks.len),
+            .offset = offsetof(tl_layer_t, chunks.len),
             .type = &JZON_ARR_SIZE_TYPE_DESC,
         },
         {
             .match = ".compression",
-            .optional = true,
-            .offset = offsetof(tl_layer_t, u.tilelayer.compression),
+            .default_json = "\"\"",
+            .offset = offsetof(tl_layer_t, compression),
             .type = &JZON_ENUM_TYPE_DESC,
             .params.str_enum = {
+                { "", TL_LAYER_NONE },
                 { "zlib", TL_LAYER_ZLIB },
                 { "gzip", TL_LAYER_GZIP },
             },
@@ -114,20 +119,20 @@ const jzon_type_desc_t TL_LAYER_TYPE_DESC = {
         {
             .match = ".data",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.tilelayer.data.gids),
+            .offset = offsetof(tl_layer_t, data.gids),
             .type = &JZON_HEAP_ARR_TYPE_DESC,
             .params.item_type = &JZON_U64_TYPE_DESC,
         },
         {
             .match = ".data",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.tilelayer.data.len),
+            .offset = offsetof(tl_layer_t, data.len),
             .type = &JZON_ARR_SIZE_TYPE_DESC,
         },
         {
             .match = ".encoding",
-            .optional = true,
-            .offset = offsetof(tl_layer_t, u.tilelayer.encoding),
+            .default_json = "\"csv\"",
+            .offset = offsetof(tl_layer_t, encoding),
             .type = &JZON_ENUM_TYPE_DESC,
             .params.str_enum = {
                 { "csv", TL_LAYER_CSV },
@@ -137,7 +142,7 @@ const jzon_type_desc_t TL_LAYER_TYPE_DESC = {
         {
             .match = ".draworder",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.objectgroup.draworder),
+            .offset = offsetof(tl_layer_t, draworder),
             .type = &JZON_ENUM_TYPE_DESC,
             .params.str_enum = {
                 { "topdown", TL_LAYER_TOPDOWN },
@@ -147,39 +152,39 @@ const jzon_type_desc_t TL_LAYER_TYPE_DESC = {
         {
             .match = ".objects",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.objectgroup.objects.data),
+            .offset = offsetof(tl_layer_t, objects.data),
             .type = &JZON_HEAP_ARR_TYPE_DESC,
             .params.item_type = &TL_OBJECT_TYPE_DESC,
         },
         {
             .match = ".objects",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.objectgroup.objects.len),
+            .offset = offsetof(tl_layer_t, objects.len),
             .type = &JZON_ARR_SIZE_TYPE_DESC,
         },
         {
             .match = ".transparentcolor",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.imagelayer.transparentcolor),
+            .offset = offsetof(tl_layer_t, transparentcolor),
             .type = &TL_COLOR_STR_TYPE_DESC,
         },
         {
             .match = ".image",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.imagelayer.image),
+            .offset = offsetof(tl_layer_t, image),
             .type = &JZON_STR_TYPE_DESC,
         },
         {
             .match = ".layers",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.group.layers.data),
+            .offset = offsetof(tl_layer_t, layers.data),
             .type = &JZON_HEAP_ARR_TYPE_DESC,
             .params.item_type = &TL_LAYER_TYPE_DESC,
         },
         {
             .match = ".layers",
             .optional = true,
-            .offset = offsetof(tl_layer_t, u.group.layers.len),
+            .offset = offsetof(tl_layer_t, layers.len),
             .type = &JZON_ARR_SIZE_TYPE_DESC,
         },
         {
@@ -194,23 +199,23 @@ static void dispose_types(tl_layer_t *self)
 {
     switch (self->type) {
     case TL_LAYER_TILELAYER:
-        for (usize_t i = 0; i < self->u.tilelayer.chunks.len; i++)
-            tl_chunk_dispose(&self->u.tilelayer.chunks.data[i]);
-        my_free(self->u.tilelayer.chunks.data);
-        my_free(self->u.tilelayer.data.gids);
+        for (usize_t i = 0; i < self->chunks.len; i++)
+            tl_chunk_dispose(&self->chunks.data[i]);
+        my_free(self->chunks.data);
+        my_free(self->data.gids);
         break;
     case TL_LAYER_OBJECTGROUP:
-        for (usize_t i = 0; i < self->u.objectgroup.objects.len; i++)
-            tl_object_dispose(&self->u.objectgroup.objects.data[i]);
-        my_free(self->u.objectgroup.objects.data);
+        for (usize_t i = 0; i < self->objects.len; i++)
+            tl_object_dispose(&self->objects.data[i]);
+        my_free(self->objects.data);
         break;
     case TL_LAYER_IMAGELAYER:
-        my_free(self->u.imagelayer.image);
+        my_free(self->image);
         break;
     case TL_LAYER_GROUP:
-        for (usize_t i = 0; i < self->u.group.layers.len; i++)
-            tl_layer_dispose(&self->u.group.layers.data[i]);
-        my_free(self->u.group.layers.data);
+        for (usize_t i = 0; i < self->layers.len; i++)
+            tl_layer_dispose(&self->layers.data[i]);
+        my_free(self->layers.data);
     }
 }
 

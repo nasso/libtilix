@@ -31,5 +31,6 @@ src:
 tests_src:
   - ./tests/chunk.c
   - ./tests/color.c
+  - ./tests/layer.c
   - ./tests/object.c
   - ./tests/property.c

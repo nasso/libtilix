@@ -53,37 +53,27 @@ struct tl_layer {
     f64_t opacity;
     bool visible;
     tl_layer_type_t type;
-    union {
-        struct {
-            struct {
-                tl_chunk_t *data;
-                usize_t len;
-            } chunks;
-            tl_layer_compression_t compression;
-            struct {
-                u64_t *gids;
-                usize_t len;
-            } data;
-            tl_layer_encoding_t encoding;
-        } tilelayer;
-        struct {
-            tl_layer_draworder_t draworder;
-            struct {
-                tl_object_t *data;
-                usize_t len;
-            } objects;
-        } objectgroup;
-        struct {
-            u32_t transparentcolor;
-            char *image;
-        } imagelayer;
-        struct {
-            struct {
-                tl_layer_t *data;
-                usize_t len;
-            } layers;
-        } group;
-    } u;
+    struct {
+        tl_chunk_t *data;
+        usize_t len;
+    } chunks;
+    tl_layer_compression_t compression;
+    struct {
+        u64_t *gids;
+        usize_t len;
+    } data;
+    tl_layer_encoding_t encoding;
+    tl_layer_draworder_t draworder;
+    struct {
+        tl_object_t *data;
+        usize_t len;
+    } objects;
+    u32_t transparentcolor;
+    char *image;
+    struct {
+        tl_layer_t *data;
+        usize_t len;
+    } layers;
     struct {
         tl_property_t *data;
         usize_t len;
