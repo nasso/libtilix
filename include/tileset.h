@@ -92,7 +92,7 @@ void tl_wangcolor_deinit(tl_wangcolor_t *self);
 typedef struct {
     bool dflip;
     bool hflip;
-    u64_t tiledid;
+    u64_t tileid;
     bool vflip;
     u8_t wangid[8];
 } tl_wangtile_t;
@@ -149,7 +149,7 @@ typedef struct {
     u64_t tileheight;
     tl_tileoffset_t tileoffset;
     struct {
-        tl_tile_t *tiles;
+        tl_tile_t *data;
         usize_t len;
     } tiles;
     u64_t tilewidth;
