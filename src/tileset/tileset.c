@@ -25,6 +25,7 @@ const jzon_type_desc_t TL_GRID_TYPE_DESC = {
         {
             .match = ".orientation",
             .default_json = "\"orthogonal\"",
+            .offset = offsetof(tl_grid_t, orientation),
             .type = &JZON_ENUM_TYPE_DESC,
             .params.str_enum = {
                 { "orthogonal", TL_GRID_ORTH },
@@ -44,12 +45,14 @@ static jzon_t default_grid(const jzon_t tset, const jzon_deser_params_t *params)
     jzon_t def = jzon_create_obj();
     f64_t tilewidth = jzon_getk_num(tset, "tilewidth");
     f64_t tileheight = jzon_getk_num(tset, "tileheight");
+    bool err = false;
 
     (void)(params);
     if (def == NULL)
         return (NULL);
-    if (jzon_setk(tset, "width", jzon_create_num(tilewidth)) ||
-        jzon_setk(tset, "height", jzon_create_num(tileheight))) {
+    err |= jzon_setk(def, "width", jzon_create_num(tilewidth));
+    err |= jzon_setk(def, "height", jzon_create_num(tileheight));
+    if (err) {
         jzon_drop(def);
         return (NULL);
     }
@@ -74,7 +77,6 @@ const jzon_type_desc_t TL_TILESET_TYPE_DESC = {
         },
         {
             .match = ".grid",
-            .optional = true,
             .default_func = &default_grid,
             .offset = offsetof(tl_tileset_t, grid),
             .type = &TL_GRID_TYPE_DESC,
@@ -101,6 +103,12 @@ const jzon_type_desc_t TL_TILESET_TYPE_DESC = {
             .match = ".imagewidth",
             .optional = true,
             .offset = offsetof(tl_tileset_t, imagewidth),
+            .type = &JZON_U64_TYPE_DESC,
+        },
+        {
+            .match = ".margin",
+            .optional = true,
+            .offset = offsetof(tl_tileset_t, margin),
             .type = &JZON_U64_TYPE_DESC,
         },
         {
@@ -186,8 +194,13 @@ const jzon_type_desc_t TL_TILESET_TYPE_DESC = {
         {
             .match = ".transparentcolor",
             .optional = true,
-            .offset = offsetof(tl_tileset_t, transparentcolor),
+            .offset = offsetof(tl_tileset_t, transparentcolor.v),
             .type = &TL_COLOR_STR_TYPE_DESC,
+        },
+        {
+            .match = ".transparentcolor",
+            .offset = offsetof(tl_tileset_t, transparentcolor.is_some),
+            .type = &JZON_IS_SOME_TYPE_DESC,
         },
         {
             .match = ".wangsets",

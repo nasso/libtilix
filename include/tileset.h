@@ -157,7 +157,7 @@ typedef struct {
         usize_t len;
     } tiles;
     u64_t tilewidth;
-    u32_t transparentcolor;
+    OPT(u32) transparentcolor;
     struct {
         tl_wangset_t *data;
         usize_t len;
