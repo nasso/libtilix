@@ -33,6 +33,9 @@ src:
   - ./src/property.c
 
 tests_src:
+  - ./tests/tileset/terrain.c
+  - ./tests/tileset/tile.c
+  - ./tests/tileset/tileset.c
   - ./tests/chunk.c
   - ./tests/color.c
   - ./tests/layer.c

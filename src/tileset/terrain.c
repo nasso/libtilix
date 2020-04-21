@@ -24,7 +24,7 @@ const jzon_type_desc_t TL_TERRAIN_TYPE_DESC = {
         },
         {
             .match = ".properties",
-            .default_json = "[]",
+            .optional = true,
             .offset = offsetof(tl_terrain_t, properties),
             .type = &TL_PROPERTIES_TYPE_DESC,
         },

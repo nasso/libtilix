@@ -114,7 +114,10 @@ const jzon_type_desc_t TL_TILE_TYPE_DESC = {
             .match = ".terrain",
             .optional = true,
             .offset = offsetof(tl_tile_t, terrain.v),
-            .type = &TL_TERRAIN_TYPE_DESC,
+            .type = &JZON_PLAIN_ARR_TYPE_DESC,
+            .params.item_type = &JZON_USIZE_TYPE_DESC,
+            .params.min_size = 4,
+            .params.max_size = 4,
         },
         {
             .match = ".terrain",
@@ -123,6 +126,7 @@ const jzon_type_desc_t TL_TILE_TYPE_DESC = {
         },
         {
             .match = ".type",
+            .optional = true,
             .offset = offsetof(tl_tile_t, type),
             .type = &JZON_STR_TYPE_DESC,
         },

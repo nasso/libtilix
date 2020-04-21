@@ -49,11 +49,15 @@ typedef struct {
     u64_t tile;
 } tl_terrain_t;
 
-OPT_DEFINE(tl_terrain_t, tl_terrain)
-
 extern const jzon_type_desc_t TL_TERRAIN_TYPE_DESC;
 
 void tl_terrain_deinit(tl_terrain_t *self);
+
+typedef struct {
+    usize_t i[4];
+} tl_tile_terrain_t;
+
+OPT_DEFINE(tl_tile_terrain_t, tl_tile_terrain)
 
 typedef struct {
     struct {
@@ -70,7 +74,7 @@ typedef struct {
         tl_property_t *data;
         usize_t len;
     } properties;
-    OPT(tl_terrain) terrain;
+    OPT(tl_tile_terrain) terrain;
     char *type;
 } tl_tile_t;
 
