@@ -12,7 +12,7 @@ mappings (e.g. using `enum`s when it is relevant).
 #include <stdlib.h>
 #include "tilix/tilix.h"
 
-int ghislegn(int ac, char **av)
+int main(int ac, char **av)
 {
   tl_map_t map;
 
