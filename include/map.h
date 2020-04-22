@@ -21,8 +21,6 @@ typedef enum {
     TL_MAP_HEX,
 } tl_map_orient_t;
 
-extern const jzon_type_desc_t TL_MAP_ORIENT_TYPE_DESC;
-
 typedef enum {
     TL_MAP_RIGHT_DOWN,
     TL_MAP_RIGHT_UP,
@@ -30,21 +28,15 @@ typedef enum {
     TL_MAP_LEFT_UP,
 } tl_map_renderorder_t;
 
-extern const jzon_type_desc_t TL_MAP_RENDERORDER_TYPE_DESC;
-
 typedef enum {
     TL_MAP_STAG_X,
     TL_MAP_STAG_Y,
 } tl_map_staggeraxis_t;
 
-extern const jzon_type_desc_t TL_MAP_STAGGERAXIS_TYPE_DESC;
-
 typedef enum {
     TL_MAP_STAG_ODD,
     TL_MAP_STAG_EVEN,
 } tl_map_staggerindex_t;
-
-extern const jzon_type_desc_t TL_MAP_STAGGERINDEX_TYPE_DESC;
 
 typedef struct {
     u32_t backgroundcolor;
