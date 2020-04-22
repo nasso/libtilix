@@ -168,6 +168,7 @@ OPT_DEFINE(tl_tileset_t, tl_tileset)
 
 extern const jzon_type_desc_t TL_TILESET_TYPE_DESC;
 
+bool tl_tileset_load(const char *path, tl_tileset_t *tset);
 void tl_tileset_deinit(tl_tileset_t *self);
 
 #endif /* LIBTILIX_TILESET_H */

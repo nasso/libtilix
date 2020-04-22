@@ -150,6 +150,12 @@ const jzon_type_desc_t TL_MAP_TYPE_DESC = {
     },
 };
 
+bool tl_map_load(const char *path, tl_map_t *map)
+{
+    my_memset(map, 0, sizeof(tl_map_t));
+    return (jzon_deser_path(path, &TL_MAP_TYPE_DESC, NULL, map));
+}
+
 void tl_map_deinit(tl_map_t *self)
 {
     for (usize_t i = 0; i < self->layers.len; i++)

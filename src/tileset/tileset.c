@@ -218,6 +218,12 @@ const jzon_type_desc_t TL_TILESET_TYPE_DESC = {
     },
 };
 
+bool tl_tileset_load(const char *path, tl_tileset_t *tset)
+{
+    my_memset(tset, 0, sizeof(tl_tileset_t));
+    return (jzon_deser_path(path, &TL_TILESET_TYPE_DESC, NULL, tset));
+}
+
 void tl_tileset_deinit(tl_tileset_t *self)
 {
     my_free(self->image);
