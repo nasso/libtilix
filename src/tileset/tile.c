@@ -60,7 +60,7 @@ const jzon_type_desc_t TL_TILE_TYPE_DESC = {
         },
         {
             .match = ".animation",
-            .default_json = "[]",
+            .optional = true,
             .offset = offsetof(tl_tile_t, animation.len),
             .type = &JZON_ARR_SIZE_TYPE_DESC,
         },
@@ -137,6 +137,8 @@ void tl_tile_deinit(tl_tile_t *self)
 {
     my_free(self->animation.frames);
     my_free(self->image);
+    if (self->objectgroup.is_some)
+        tl_layer_deinit(&self->objectgroup.v);
     for (usize_t i = 0; i < self->properties.len; i++)
         tl_property_deinit(&self->properties.data[i]);
     my_free(self->properties.data);
