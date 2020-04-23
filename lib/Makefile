@@ -5,7 +5,7 @@
 ## Makefile to build libraries
 ##
 
-REPO_PREFIX	=	git@github.com:nasso
+REPO_PREFIX	=	https://github.com/nasso
 
 makelib		=	$(MAKE) -sC $(1) $(2) NAME=$(abspath ./$(1).a);
 
