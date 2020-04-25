@@ -39,11 +39,13 @@ const jzon_type_desc_t TL_LAYER_TYPE_DESC = {
         },
         {
             .match = ".width",
+            .optional = true,
             .offset = offsetof(tl_layer_t, width),
             .type = &JZON_U64_TYPE_DESC,
         },
         {
             .match = ".height",
+            .optional = true,
             .offset = offsetof(tl_layer_t, height),
             .type = &JZON_U64_TYPE_DESC,
         },

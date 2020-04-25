@@ -258,6 +258,7 @@ void tl_object_deinit(tl_object_t *self)
     my_free(self->name);
     for (usize_t i = 0; i < self->properties.len; i++)
         tl_property_deinit(&self->properties.data[i]);
+    my_free(self->properties.data);
     my_free(self->template);
     my_free(self->type);
     switch (self->kind) {
