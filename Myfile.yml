@@ -22,6 +22,8 @@ allowed:
   - free
 
 src:
+  - ./src/properties/get.c
+  - ./src/properties/get_prim.c
   - ./src/tileset/terrain.c
   - ./src/tileset/tile.c
   - ./src/tileset/tileset.c

@@ -46,5 +46,15 @@ extern const jzon_type_desc_t TL_PROPERTY_TYPE_DESC;
 extern const jzon_type_desc_t TL_PROPERTIES_TYPE_DESC;
 
 void tl_property_deinit(tl_property_t *self);
+const tl_property_t *tl_properties_get(const tl_properties_t *self,
+    const char *name);
+const char *tl_properties_get_str(const tl_properties_t *self,
+    const char *name);
+const char *tl_properties_get_file(const tl_properties_t *self,
+    const char *name);
+i64_t tl_properties_get_i64(const tl_properties_t *self, const char *name);
+f64_t tl_properties_get_f64(const tl_properties_t *self, const char *name);
+bool tl_properties_get_bool(const tl_properties_t *self, const char *name);
+u32_t tl_properties_get_color(const tl_properties_t *self, const char *name);
 
 #endif /* LIBTILIX_PROPERTY_H */
