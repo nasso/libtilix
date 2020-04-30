@@ -37,7 +37,10 @@ typedef struct {
     tl_property_value_t u;
 } tl_property_t;
 
-OPT_DEFINE(tl_property_t, tl_property)
+typedef struct {
+    tl_property_t *data;
+    usize_t len;
+} tl_properties_t;
 
 extern const jzon_type_desc_t TL_PROPERTY_TYPE_DESC;
 extern const jzon_type_desc_t TL_PROPERTIES_TYPE_DESC;

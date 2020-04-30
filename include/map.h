@@ -50,10 +50,7 @@ typedef struct {
     i64_t nextlayerid;
     i64_t nextobjectid;
     tl_map_orient_t orientation;
-    struct {
-        tl_property_t *data;
-        usize_t len;
-    } properties;
+    tl_properties_t properties;
     tl_map_renderorder_t renderorder;
     tl_map_staggeraxis_t staggeraxis;
     tl_map_staggerindex_t staggerindex;

@@ -74,10 +74,7 @@ struct tl_layer {
         tl_layer_t *data;
         usize_t len;
     } layers;
-    struct {
-        tl_property_t *data;
-        usize_t len;
-    } properties;
+    tl_properties_t properties;
 };
 
 OPT_DEFINE(tl_layer_t, tl_layer)

@@ -42,10 +42,7 @@ extern const jzon_type_desc_t TL_FRAME_TYPE_DESC;
 
 typedef struct {
     char *name;
-    struct {
-        tl_property_t *data;
-        usize_t len;
-    } properties;
+    tl_properties_t properties;
     u64_t tile;
 } tl_terrain_t;
 
@@ -70,10 +67,7 @@ typedef struct {
     u64_t imagewidth;
     OPT(tl_layer) objectgroup;
     f64_t probability;
-    struct {
-        tl_property_t *data;
-        usize_t len;
-    } properties;
+    tl_properties_t properties;
     OPT(tl_tile_terrain) terrain;
     char *type;
 } tl_tile_t;
@@ -113,10 +107,7 @@ typedef struct {
         usize_t len;
     } edgecolors;
     char *name;
-    struct {
-        tl_property_t *data;
-        usize_t len;
-    } properties;
+    tl_properties_t properties;
     u64_t tile;
     struct {
         tl_wangtile_t *data;
@@ -138,10 +129,7 @@ typedef struct {
     u64_t imagewidth;
     u64_t margin;
     char *name;
-    struct {
-        tl_property_t *data;
-        usize_t len;
-    } properties;
+    tl_properties_t properties;
     char *source;
     u64_t spacing;
     struct {

@@ -66,10 +66,7 @@ typedef struct {
     f64_t height;
     u64_t id;
     char *name;
-    struct {
-        tl_property_t *data;
-        usize_t len;
-    } properties;
+    tl_properties_t properties;
     f64_t rotation;
     char *template;
     char *type;

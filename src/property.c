@@ -81,24 +81,19 @@ const jzon_type_desc_t TL_PROPERTY_TYPE_DESC = {
     },
 };
 
-struct properties {
-    tl_property_t *data;
-    usize_t len;
-};
-
 const jzon_type_desc_t TL_PROPERTIES_TYPE_DESC = {
     .primitive = JZ_ARR,
-    .size = sizeof(struct properties),
+    .size = sizeof(tl_properties_t),
     .fields = {
         {
             .match = "",
-            .offset = offsetof(struct properties, data),
+            .offset = offsetof(tl_properties_t, data),
             .type = &JZON_HEAP_ARR_TYPE_DESC,
             .params.item_type = &TL_PROPERTY_TYPE_DESC,
         },
         {
             .match = "",
-            .offset = offsetof(struct properties, len),
+            .offset = offsetof(tl_properties_t, len),
             .type = &JZON_ARR_SIZE_TYPE_DESC,
         },
     },
