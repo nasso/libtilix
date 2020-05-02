@@ -20,7 +20,26 @@ static const char *EXAMPLE =
     "      \"type\":\"string\","
     "      \"value\":\"myProperty1_value\""
     "    }],"
-    "  \"terrain\":[0, 1, 2, 3]"
+    "  \"terrain\":[0, 1, 2, 3],"
+    "  \"objectgroup\":{"
+    "      \"id\":47,"
+    "      \"draworder\":\"topdown\","
+    "      \"height\":0,"
+    "      \"name\":\"people\","
+    "      \"objects\":[ ],"
+    "      \"opacity\":1,"
+    "      \"properties\":["
+    "        {"
+    "          \"name\":\"layerProp1\","
+    "          \"type\":\"string\","
+    "          \"value\":\"someStringValue\""
+    "        }],"
+    "      \"type\":\"objectgroup\","
+    "      \"visible\":true,"
+    "      \"width\":0,"
+    "      \"x\":0,"
+    "      \"y\":0"
+    "    }"
     "}";
 
 static const usize_t EXAMPLE_TERRAIN[4] = {0, 1, 2, 3};
@@ -47,5 +66,6 @@ Test(tile, example)
     cr_assert(tile.terrain.is_some);
     cr_assert_arr_eq(tile.terrain.v.i, EXAMPLE_TERRAIN, 4 * sizeof(usize_t));
     cr_assert_null(tile.image);
-    cr_assert_not(tile.objectgroup.is_some);
+    cr_assert(tile.objectgroup.is_some);
+    cr_assert_str_eq(tile.objectgroup.v.name, "people");
 }
