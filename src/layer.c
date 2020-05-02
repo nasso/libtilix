@@ -19,6 +19,7 @@ const jzon_type_desc_t TL_LAYER_TYPE_DESC = {
     .fields = {
         {
             .match = ".id",
+            .optional = true,
             .offset = offsetof(tl_layer_t, id),
             .type = &JZON_U64_TYPE_DESC,
         },
