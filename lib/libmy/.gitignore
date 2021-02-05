@@ -1,0 +1,24 @@
+/.vscode
+/target
+*.vim
+
+# Header deps
+*.d
+
+# Object files
+*.o
+
+# Libraries
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.so
+*.so.*
+
+# Executables
+*.out
+/unit_tests
+
+# Coverage reports
+*.gcda
+*.gcno

@@ -1,0 +1,56 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    name: Build
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build project
+        env:
+          CC: gcc-8
+        run: make
+
+  test:
+
+    name: Test
+    needs: [build]
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v1
+        id: cache
+        env:
+          cache-name: cache-criterion
+        with:
+          path: ${{ runner.temp }}/Criterion
+          key: ${{ runner.os }}-test-${{ env.cache-name }}
+
+      - name: Clone Criterion
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: ${{ runner.temp }}
+        run: git clone --recursive https://github.com/Snaipe/Criterion.git --branch=master --depth=1
+
+      - name: Build Criterion
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: ${{ runner.temp }}/Criterion
+        run: mkdir build && cd build && cmake .. && cmake --build .
+
+      - name: Run tests
+        env:
+          CC: gcc-8
+          LD_LIBRARY_PATH: ${{ runner.temp }}/Criterion/build:${{ env.LD_LIBRARY_PATH }}
+          LIBRARY_PATH: ${{ runner.temp }}/Criterion/build:${{ env.LIBRARY_PATH }}
+          CPATH: ${{ runner.temp }}/Criterion/include:${{ env.CPATH }}
+        run: make tests_run ARGS="--verbose"

@@ -7,7 +7,6 @@
 
 # Libraries
 *.a
-/lib/include
 
 # Object files
 *.o
@@ -18,9 +17,8 @@
 
 # Executables
 *.out
-/target
 /libtilix.a
-/unit-tests
+/unit_tests
 
 # Coverage reports
 *.gcda

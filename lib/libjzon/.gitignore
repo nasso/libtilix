@@ -1,0 +1,27 @@
+/ignore
+
+# Editor configs
+.vscode
+*.vim
+
+# Makefile dependencies
+*.d
+
+# Libraries/dependencies
+*.a
+
+# Object files
+*.o
+
+# Shared objects
+*.so
+*.so.*
+
+# Executables
+*.out
+libjzon.a
+unit_tests
+
+# Coverage reports
+*.gcda
+*.gcno
